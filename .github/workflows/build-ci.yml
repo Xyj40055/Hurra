@@ -34,7 +34,7 @@ jobs:
         release: '14.2.Rel1'
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake ninja-build llvm lld
+      run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
 
     - name: Cache Pico SDK
       id: cache-pico-sdk
@@ -63,7 +63,6 @@ jobs:
           -DPICO_BOARD=${{ matrix.board }} \
           -DPICO_PLATFORM=${{ matrix.platform }} \
           -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=arm-none-eabi-lld -Wl,--shuffle-sections=0" \
           -G Ninja
         ninja
 
@@ -111,7 +110,7 @@ jobs:
         release: '14.2.Rel1'
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake ninja-build llvm lld
+      run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
 
     - name: Cache Pico SDK
       id: cache-pico-sdk
@@ -137,7 +136,6 @@ jobs:
           -DPICO_SDK_PATH=$PICO_SDK_PATH \
           -DPICO_BOARD=${{ matrix.board }} \
           -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=arm-none-eabi-lld -Wl,--shuffle-sections=0" \
           -G Ninja
         ninja
 
