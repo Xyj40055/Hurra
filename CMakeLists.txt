@@ -104,8 +104,8 @@ target_compile_options(PIOKMbox PRIVATE
 # -ffast-math: Enable FPU VFMA (fused multiply-add) instructions on Cortex-M33
 # -funroll-loops: Unroll tight inner loops (helps DMA/UART processing)
 # -ffunction-sections -fdata-sections: Enable dead code elimination with --gc-sections
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -03 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -03 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
 target_link_options(PIOKMbox PRIVATE -Wl,--gc-sections)
 
 # 新增二进制混淆链接选项
