@@ -92,7 +92,8 @@ pico_enable_stdio_usb(PIOKMbox 0)
 
 # 新增二进制混淆编译选项
 target_compile_options(PIOKMbox PRIVATE  
-    -fno-inline 
+    -Os                          # 优化大小，改变二进制结构
+    -fno-inline                  # 禁止函数内联，改变二进制结构
     -fomit-frame-pointer         # 省略帧指针，不影响功能
     -fno-unwind-tables           # 不生成调试用的unwind表，减少特征信息
     -fno-asynchronous-unwind-tables  # 不生成异步unwind表，减少特征信息
@@ -109,7 +110,9 @@ target_link_options(PIOKMbox PRIVATE -Wl,--gc-sections)
 
 # 新增二进制混淆链接选项
 target_link_options(PIOKMbox PRIVATE
-    -Wl,--gc-sections              # 更彻底地去除符号表和调试信息
+    -s                           # 去除符号表
+    -Wl,--gc-sections            # 移除未使用的段
+    -Wl,--strip-all              # 更彻底地去除符号表和调试信息
 )
 
 # Add the standard library to the build
