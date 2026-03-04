@@ -1059,19 +1059,19 @@ static void smooth_set_humanization_mode_internal(humanization_mode_t mode, bool
             g_smooth.max_per_frame = (int16_t)rng_range(10000, 12000);   // High-DPI: ~650 IPS at 26000 DPI
             g_smooth.velocity_matching_enabled = true;
             g_smooth.humanization.jitter_enabled = true;
-            g_smooth.humanization.jitter_amount_fp = int_to_fp(1);      // 1.0px base tremor
-            g_smooth.humanization.overshoot_chance = 10;                // 10% chance
-            g_smooth.humanization.overshoot_max_fp = int_to_fp(2);      // max 2px
-            g_smooth.humanization.vel_slow_threshold_fp = int_to_fp(rng_range(1, 4));
-            g_smooth.humanization.vel_fast_threshold_fp = int_to_fp(rng_range(8, 14));
-            g_smooth.humanization.delivery_error_fp = SMOOTH_FP_ONE / 50;  // ±2%
+            g_smooth.humanization.jitter_amount_fp = int_to_fp(1.2);      // 1.2px base tremor
+            g_smooth.humanization.overshoot_chance = 12;                // 12% chance
+            g_smooth.humanization.overshoot_max_fp = int_to_fp(3);      // max 3px
+            g_smooth.humanization.vel_slow_threshold_fp = int_to_fp(rng_range(2, 5));
+            g_smooth.humanization.vel_fast_threshold_fp = int_to_fp(rng_range(7, 12));
+            g_smooth.humanization.delivery_error_fp = SMOOTH_FP_ONE / 33;  // ±3%
             g_smooth.humanization.accum_clamp_fp = int_to_fp(12000);     // Matches max_per_frame,
                                                                         // lets accumulator drain naturally
                                                                         // when queue overflow dumps to accum
-            g_smooth.humanization.onset_jitter_min = 1;                 // 1-4 frames
-            g_smooth.humanization.onset_jitter_max = 4;
-            g_smooth.humanization.vel_filter_alpha_min_fp = SMOOTH_FP_ONE * 50 / 100;  // 0.50 — near-passthrough
-            g_smooth.humanization.vel_filter_alpha_max_fp = SMOOTH_FP_ONE * 90 / 100;  // 0.90 — near-instant
+            g_smooth.humanization.onset_jitter_min = 2;                 // 1-4 frames
+            g_smooth.humanization.onset_jitter_max = 5;
+            g_smooth.humanization.vel_filter_alpha_min_fp = SMOOTH_FP_ONE * 60 / 100;  // 0.50 — near-passthrough
+            g_smooth.humanization.vel_filter_alpha_max_fp = SMOOTH_FP_ONE * 85 / 100;  // 0.90 — near-instant
             g_smooth.humanization.vel_filter_accel_sens_fp = SMOOTH_FP_ONE * 25 / 100; // 0.25
             break;
             
