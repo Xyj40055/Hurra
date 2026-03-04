@@ -92,7 +92,7 @@ pico_enable_stdio_usb(PIOKMbox 0)
 
 # 新增二进制混淆编译选项
 target_compile_options(PIOKMbox PRIVATE  
-    -Os                          # 优化大小，改变二进制结构
+    -O3                          # 优化大小，改变二进制结构
     -fno-inline                  # 禁止函数内联，改变二进制结构
     -fomit-frame-pointer         # 省略帧指针，不影响功能
     -fno-unwind-tables           # 不生成调试用的unwind表，减少特征信息
@@ -104,15 +104,15 @@ target_compile_options(PIOKMbox PRIVATE
 # -ffast-math: Enable FPU VFMA (fused multiply-add) instructions on Cortex-M33
 # -funroll-loops: Unroll tight inner loops (helps DMA/UART processing)
 # -ffunction-sections -fdata-sections: Enable dead code elimination with --gc-sections
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Os -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -03 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -03 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
 target_link_options(PIOKMbox PRIVATE -Wl,--gc-sections)
 
 # 新增二进制混淆链接选项
 target_link_options(PIOKMbox PRIVATE
     -s                           # 去除符号表
     -Wl,--gc-sections            # 移除未使用的段
-    -Wl,--strip-all              # 更彻底地去除符号表和调试信息
+    -Wl,--strip-all             
 )
 
 # Add the standard library to the build
