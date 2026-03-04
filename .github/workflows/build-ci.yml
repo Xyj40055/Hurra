@@ -167,14 +167,23 @@ jobs:
         submodules: recursive
 
     - name: Install mingw-w64
-      run: sudo apt-get update && sudo apt-get install -y mingw-w64
+      run: |
+        sudo apt-get update && sudo apt-get install -y mingw-w64
+        # 新增：仅添加这3行，解决hid_defs.h缺失（原有行完全保留）
+        sudo apt-get install -y libhidapi-dev libhidapi-hidraw0
+        sudo cp /usr/include/hidapi/hid*.h /usr/x86_64-w64-mingw32/include/
+        sudo cp /usr/lib/x86_64-linux-gnu/libhidapi.a /usr/x86_64-w64-mingw32/lib/libhid.a
 
     - name: Build kmbox_relay for Windows
       run: |
         cd tools
         x86_64-w64-mingw32-gcc -Wall -Wextra -O2 \
           -I../lib/wire-protocol/include \
-          -o kmbox_relay.exe kmbox_relay.c -lws2_32
+          # 新增：仅添加这1行头文件路径（原有行完全保留）
+          -I/usr/x86_64-w64-mingw32/include \
+          -o kmbox_relay.exe kmbox_relay.c -lws2_32 \
+          # 新增：仅添加这2行链接库（原有行完全保留）
+          -lhid -lsetupapi
         echo "Build successful:"
         ls -la kmbox_relay.exe
 
@@ -183,7 +192,11 @@ jobs:
         cd tools
         gcc -Wall -Wextra -O2 \
           -I../lib/wire-protocol/include \
-          -o kmbox_relay kmbox_relay.c
+          # 新增：仅添加这1行头文件路径（原有行完全保留）
+          -I/usr/include/hidapi \
+          -o kmbox_relay kmbox_relay.c \
+          # 新增：仅添加这2行链接库（原有行完全保留）
+          -lhidapi-hidraw -lpthread
         echo "Build successful:"
         ls -la kmbox_relay
 
