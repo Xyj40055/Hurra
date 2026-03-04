@@ -63,7 +63,7 @@ jobs:
           -DPICO_BOARD=${{ matrix.board }} \
           -DPICO_PLATFORM=${{ matrix.platform }} \
           -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=lld -Wl,--shuffle-sections=0" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=arm-none-eabi-lld -Wl,--shuffle-sections=0" \
           -G Ninja
         ninja
 
@@ -137,7 +137,7 @@ jobs:
           -DPICO_SDK_PATH=$PICO_SDK_PATH \
           -DPICO_BOARD=${{ matrix.board }} \
           -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=lld -Wl,--shuffle-sections=0" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=arm-none-eabi-lld -Wl,--shuffle-sections=0" \
           -G Ninja
         ninja
 
