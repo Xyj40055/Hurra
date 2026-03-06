@@ -88,32 +88,16 @@ pico_set_program_version(PIOKMbox "0.1")
 # USB CDC is disabled to avoid breaking HID enumeration
 # Debug output can be sent through the KMBox interface if needed
 pico_enable_stdio_uart(PIOKMbox 1)
-pico_enable_stdio_usb(PIOKMbox 1)
-
-# 新增二进制混淆编译选项
-target_compile_options(PIOKMbox PRIVATE  
-    -O3                          # 优化大小，改变二进制结构
-    -fno-inline                  # 禁止函数内联，改变二进制结构
-    -fomit-frame-pointer         # 省略帧指针，不影响功能
-    -fno-unwind-tables           # 不生成调试用的unwind表，减少特征信息
-    -fno-asynchronous-unwind-tables  # 不生成异步unwind表，减少特征信息
-)
+pico_enable_stdio_usb(PIOKMbox 0)
 
 # Optimization flags for release performance at 240MHz
-# -Os: 优化体积同时打乱二进制结构，替代-O3避免和混淆选项冲突
+# -O3: Aggressive inlining and vectorization
 # -ffast-math: Enable FPU VFMA (fused multiply-add) instructions on Cortex-M33
 # -funroll-loops: Unroll tight inner loops (helps DMA/UART processing)
 # -ffunction-sections -fdata-sections: Enable dead code elimination with --gc-sections
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -ffast-math -funroll-loops -ffunction-sections -fdata-sections")
 target_link_options(PIOKMbox PRIVATE -Wl,--gc-sections)
-
-# 新增二进制混淆链接选项
-target_link_options(PIOKMbox PRIVATE
-    -s                           # 去除符号表
-    -Wl,--gc-sections            # 移除未使用的段
-    -Wl,--strip-all             
-)
 
 # Add the standard library to the build
 target_link_libraries(PIOKMbox
