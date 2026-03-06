@@ -68,6 +68,7 @@ add_executable(PIOKMbox
     led_control.c
     usb_hid.c
     watchdog.c
+    stdbool.h
     state_management.c
     kmbox_serial_handler.c
     smooth_injection.c
