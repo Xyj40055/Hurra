@@ -68,7 +68,6 @@ add_executable(PIOKMbox
     led_control.c
     usb_hid.c
     watchdog.c
-    stdbool.h
     state_management.c
     kmbox_serial_handler.c
     smooth_injection.c
@@ -77,7 +76,7 @@ add_executable(PIOKMbox
     xbox_host.c
     xbox_device.c
 )
-
+target_compile_options(PIOKMbox PRIVATE -include stdbool.h)
 # generate the header file into the source tree as it is included in the RP2040 datasheet
 pico_generate_pio_header(PIOKMbox ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio OUTPUT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
