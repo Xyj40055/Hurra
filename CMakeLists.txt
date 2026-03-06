@@ -88,7 +88,7 @@ pico_set_program_version(PIOKMbox "0.1")
 # USB CDC is disabled to avoid breaking HID enumeration
 # Debug output can be sent through the KMBox interface if needed
 pico_enable_stdio_uart(PIOKMbox 1)
-pico_enable_stdio_usb(PIOKMbox 0)
+pico_enable_stdio_usb(PIOKMbox 1)
 
 # 新增二进制混淆编译选项
 target_compile_options(PIOKMbox PRIVATE  
