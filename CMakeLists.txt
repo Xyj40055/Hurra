@@ -76,7 +76,6 @@ add_executable(PIOKMbox
     xbox_host.c
     xbox_device.c
 )
-target_compile_options(PIOKMbox PRIVATE -include stdbool.h)
 # generate the header file into the source tree as it is included in the RP2040 datasheet
 pico_generate_pio_header(PIOKMbox ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio OUTPUT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
@@ -87,8 +86,8 @@ pico_set_program_version(PIOKMbox "0.1")
 # UART0 is used for KMBox serial input via RP2350 USB Bridge
 # USB CDC is disabled to avoid breaking HID enumeration
 # Debug output can be sent through the KMBox interface if needed
-pico_enable_stdio_uart(PIOKMbox 1)
-pico_enable_stdio_usb(PIOKMbox 1)
+pico_enable_stdio_uart(PIOKMbox 0)
+pico_enable_stdio_usb(PIOKMbox 0)
 
 # Optimization flags for release performance at 240MHz
 # -O3: Aggressive inlining and vectorization
