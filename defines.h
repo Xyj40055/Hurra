@@ -87,7 +87,7 @@
 
 #define BRIDGE_UART_TX_PIN      KMBOX_UART_TX_PIN
 #define BRIDGE_UART_RX_PIN      KMBOX_UART_RX_PIN
-#define KMBOX_UART_BAUDRATE     115200  // Baud rate (must match bridge) - 3 Mbaud for max throughput
+#define KMBOX_UART_BAUDRATE     3000000  // Baud rate (must match bridge) - 3 Mbaud for max throughput
                                         // At 48MHz clk_peri: 48000000/3000000 = 16 (exact, 0 ppm error)
 #define KMBOX_UART_FIFO_SIZE    32       // UART FIFO size for buffering
 
