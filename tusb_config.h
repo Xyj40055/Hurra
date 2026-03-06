@@ -86,7 +86,7 @@
 // We mirror all of them on the device side so the downstream PC sees an
 // identical interface layout.
 #define CFG_TUD_HID              4
-#define CFG_TUD_CDC              1 
+
 // HID buffer size - should be sufficient to hold ID (if any) + Data
 #define CFG_TUD_HID_EP_BUFSIZE   64
 
