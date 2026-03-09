@@ -474,7 +474,7 @@ def main():
     c_code = generate_c_file()
     
     output_path = "../humanization_lut.c"
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(c_code)
     
     print(f"Generated {output_path}")
