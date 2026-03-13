@@ -1056,7 +1056,7 @@ static void smooth_set_humanization_mode_internal(humanization_mode_t mode, bool
         case HUMANIZATION_FULL:
             // Full humanization — for raw/robotic input
             // Subdivision, IIR velocity filter, onset delay, overshoot — the works
-            g_smooth.max_per_frame = (int16_t)rng_range(10000, 12000);   // High-DPI: ~650 IPS at 26000 DPI
+            g_smooth.max_per_frame = (int16_t)rng_range(13, 20);   // High-DPI: ~650 IPS at 26000 DPI
             g_smooth.velocity_matching_enabled = true;
             g_smooth.humanization.jitter_enabled = true;
             g_smooth.humanization.jitter_amount_fp = int_to_fp(1.2);      // 1.2px base tremor
